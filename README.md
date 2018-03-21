@@ -32,7 +32,7 @@ const data = [{
 
 We will use the following hands-on-lab to create a node.js backend with Docker + Kubernetes in AKS
 
-https://github.com/Azure/blackbelt-aks-hackfest/issues/39
+https://github.com/Azure/blackbelt-aks-hackfest/
 
 You will use the following javascript code to return a model object down to the react-native client.
 
