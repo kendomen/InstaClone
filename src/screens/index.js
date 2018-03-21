@@ -6,7 +6,9 @@ import AddScreen from './AddScreen';
 import FavoriteScreen from './FavoriteScreen';
 import ProfileScreen from './ProfileScreen';
 
-console.ignoredYellowBox = ['Remote debugger'];
+//Ignore debugger
+console.disableYellowBox = true;
+
 
 // register all screens of the app (including internal ones)
 export function registerScreens() {
