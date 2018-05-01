@@ -66,12 +66,16 @@ export default class HomeScreen extends PureComponent {
         return response.json();
       })
       .then(responseJson => {
+        //console.log("MAKE REMOTE REQUEST: " + responseJson);
+
         // -------------------------------------------------
         // Since we haven't implemented liked in the server
         // we adjust the state here
         // -------------------------------------------------
         responseJson.posts.forEach(function(post, index) {
           post["liked"] = [];
+          //console.log(index)
+          //this.state.liked = []
         });
 
         this.setState({
@@ -121,10 +125,142 @@ export default class HomeScreen extends PureComponent {
         style={{ flex: 1 }}
         data={this.state.posts}
         refreshing={this.state.refreshing}
-        onRefresh={this.handleRefresh}
         keyExtractor={(item, index) => item.id}
         extraData={this.state.refreshing}
-        renderItem={item => this.renderRow(item)}
+        renderItem={({ item, index }) => (
+          <View>
+            <View
+              style={{
+                height: 60,
+                backgroundColor: "white",
+                flexDirection: "row"
+              }}
+            >
+              <FastImage
+                style={{
+                  width: 36,
+                  height: 36,
+                  margin: 12,
+                  borderRadius: 18,
+                  borderWidth: StyleSheet.hairlineWidth,
+                  borderColor: "lightgray"
+                }}
+                source={require("../assets/ken.jpeg")}
+              />
+
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  height: 60,
+                  lineHeight: 60,
+                  flex: 1
+                }}
+              >
+                kdomen
+              </Text>
+              <Ionicons
+                name="ios-more"
+                size={30}
+                color="black"
+                style={{ lineHeight: 60, marginRight: 15 }}
+                onPress={this.share}
+              />
+            </View>
+            <TouchableOpacity onPress={this.doubleTap} activeOpacity={1}>
+              <AvView type={item.type} source={item.source} />
+            </TouchableOpacity>
+            <View
+              style={{
+                height: 54,
+                backgroundColor: "white",
+                flexDirection: "row"
+              }}
+            >
+              <TouchableOpacity
+                style={styles.like}
+                onPress={() => {
+                  var userIndex = this.state.posts[index].liked.indexOf(
+                    "kdomen"
+                  );
+                  if (this.state.posts[index].liked.includes("kdomen")) {
+                    console.log("removing like");
+                    this.state.posts[index].liked.splice(userIndex, 1);
+                    this.setState({
+                      posts: this.state.posts,
+                      refreshing: true
+                    });
+                  } else {
+                    console.log("adding like");
+                    this.state.posts[index].liked.push("kdomen");
+                    console.log(
+                      "index: " +
+                        this.state.posts[index].liked.indexOf("kdomen")
+                    );
+                    this.setState({
+                      posts: this.state.posts,
+                      refreshing: true
+                    });
+                  }
+                }}
+              >
+                {!this.state.posts[index].liked.indexOf("kdomen") == 0 ? (
+                  <Ionicons
+                    name="ios-heart-outline"
+                    size={34}
+                    color="black"
+                    style={{ marginTop: 8, marginLeft: 15 }}
+                  />
+                ) : (
+                  <Ionicons
+                    name="ios-heart"
+                    size={34}
+                    color="red"
+                    style={{ marginTop: 8, marginLeft: 15 }}
+                  />
+                )}
+              </TouchableOpacity>
+              <Ionicons
+                name="ios-text-outline"
+                size={34}
+                color="black"
+                style={{ marginTop: 12, marginLeft: 20 }}
+                onPress={() => 
+                  Navigation.showModal({
+                    screen: "instaClone.CommentsScreen",
+                    title: "Comments"
+                  })
+                
+                }
+              />
+              <Ionicons
+                name="ios-send-outline"
+                size={34}
+                color="black"
+                style={{ marginTop: 12, marginLeft: 20 }}
+                onPress={() => alert("go send!")}
+              />
+              <View style={{ flex: 1 }} />
+              <Ionicons
+                name="ios-bookmark-outline"
+                size={34}
+                color="black"
+                style={{ marginTop: 12, marginRight: 15 }}
+              />
+            </View>
+            <View style={{ marginBottom: 20, paddingLeft: 15 }}>
+              <Text
+                style={{ fontSize: 12, color: "black", fontWeight: "bold" }}
+              >
+                {item.liked.length} likes
+              </Text>
+            </View>
+            <View style={{ marginBottom: 20, paddingLeft: 15 }}>
+              <Text style={{ fontSize: 12, color: "gray" }}>
+                {"X MINUTES AGO"}
+              </Text>
+            </View>
+          </View>
+        )}
       />
     );
   }

@@ -58,38 +58,17 @@ export default class AvView extends Component {
         <View>
           <Image
             source={{ uri: this.props.source }}
-            style={{ width, height: this.state.imageHeight }}
-            resizeMode={'contain'}
+            style={{ height: 125 }}
           />
         </View>
       )
     }
-    
-    return (
-      <TouchableOpacity
-        onPress={() => {this.setState({ paused: !this.state.paused })}}
-        activeOpacity={0.8}
-        style={{ width, height: width }}
-      >
-        <Video
-          source={{ uri: this.props.source }}
-          style={{ width, height: width }}
-          rate={this.state.rate}
-          paused={this.state.paused}
-          volume={this.state.volume}
-          muted={this.state.muted}
-          ignoreSilentSwitch={this.state.ignoreSilentSwitch}
-          resizeMode={'cover'}
-          onLoad={this.onLoad}
-          onBuffer={this.onBuffer}
-          onProgress={this.onProgress}
-          onEnd={() => null}
-          repeat={true}
-        />
-      <View style={{ position: 'absolute', right: 10, top: 10, backgroundColor: 'rgba(0, 0, 0, 0.6)', height: 40, width: 40, borderRadius: 20 }}>
-        <Ionicons name="ios-videocam-outline" size={24} color="white" style={{ backgroundColor: 'transparent', lineHeight: 40, marginLeft: 10 }} />
-      </View>
-      </TouchableOpacity>
-    )
+    else {
+      return (
+        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', marginTop: 50}}>
+          <Text>Video Thumbnail</Text>
+        </View>
+      )
+    }
   }
 }
