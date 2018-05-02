@@ -27,10 +27,6 @@ export default class CameraScreen2 extends React.Component {
         },
         body: formData
       }).then(res => {
-        /** 
-        setTimeout(function(){
-          console.log("sleep for 4 sec")
-        }, 4000);*/
         this.props.navigator.switchToTab({
           tabIndex: 0
         });

@@ -112,7 +112,7 @@ export default class ProfileScreen extends HomeScreen {
                     
                     }
                   >
-                    <Text>Edit Profile</Text>
+                    <Text>Edit Profiles</Text>
                   </Button>
 
                   <Button

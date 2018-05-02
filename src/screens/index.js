@@ -31,5 +31,5 @@ export function registerScreens() {
   Navigation.registerComponent('instaClone.CameraScreen2', () => CameraScreen2);
   Navigation.registerComponent('instaClone.VideoScreen', () => VideoScreen);
   Navigation.registerComponent('instaClone.CommentsScreen', () => CommentsScreen);
-  Navigation.registerComponent('instaClone.EditProfileScreen', () => EditProfileScree);
+  Navigation.registerComponent('instaClone.EditProfileScreen', () => EditProfileScreen);
 }

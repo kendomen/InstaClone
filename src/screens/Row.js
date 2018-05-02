@@ -72,80 +72,36 @@ class Row extends Component {
           />
           <View style={styles.usernameContainer}>
             <Text>kdomen</Text>
+            
           </View>
         </View>
         <View>
-        <TouchableOpacity onPress={this.doubleTap} activeOpacity={1}>
-          <AvView resizeMode="contain" type={this.props.data.item.type} source={this.props.data.item.source} >
+       
+          <AvView resizeMode="contain" type={this.props.data.item.type} source={this.props.data.item.source} data={this.props.data} >
             <View style={styles.likedContainer}>
               {(this.state.animation) ? <Icon name="md-heart" size={76} color="white" /> : null}  
             </View>
           </AvView>
-        </TouchableOpacity>
+       
         </View>
         {/*<View style={styles.itemImageContainer}>*/}
-        <View
-              style={{
-                height: 54,
-                backgroundColor: "white",
-                flexDirection: "row",
-              }}
-            >
-          <TouchableOpacity
-            style={styles.like}
-            onPress={() => this.setState({ isLiked: !this.state.isLiked })}
-          >
-            {!this.state.isLiked ? (
-              <Icon name="ios-heart-outline" size={30} color="black" />
-            ) : (
-              <Icon name="ios-heart" size={30} color="red" />
-            )}
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.comment}
-            onPress={() => alert("go comment!")}
-          >
-            <Icon name="ios-chatbubbles-outline" size={30} color="black" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.share}
-            onPress={() => alert("Share!!")}
-          >
-            <Icon name="ios-redo-outline" size={30} color="black" />
-          </TouchableOpacity>
-        </View>
+        
         {/*<View style={styles.seperator} />*/}
        
         
-        <View style={{ paddingLeft: 15, paddingRight: 15 }}>
-          { this.props.data.item.tags ?  
-              <Text>#{this.props.data.item.tags.join(" #")}</Text>
-                 : null
-          }
-        </View>
+        
         
 
-        <View style={styles.footer}>
-          <View style={styles.likeCount}>
-            <Icon name="ios-heart" size={12} color="black" />
-            <Text style={styles.text}>
-              {" "}
-              {/*{this.props.data.likes.count} liked{" "}*/}
-              {this.state.isLiked ? "Liked by kdomen" : "0 likes"}
-            </Text>
-          </View>
-          <TouchableOpacity
-            style={{ width: 100 }}
-            onPress={() => alert("go comment")}
-          />
-        </View>
-        <View style={{ marginBottom: 20, paddingLeft: 15 }}>
-              <Text style={{ fontSize: 12, color: "gray" }}>
-                {"X MINUTES AGO"}
-              </Text>
-        </View>
+        
+       
       </View>
     );
+  }
+
+  convertDate(epoch) {
+    var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
+    d.setUTCSeconds(epoch);
+    return (d.toString());
   }
 
   doubleTap() {

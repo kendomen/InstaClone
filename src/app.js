@@ -85,7 +85,7 @@ export default class App {
           screen: "instaClone.HomeScreen", // this is a registered name for a screen
           icon: icons["ios-home-outline"],
           selectedIcon: icons["ios-home"],
-          title: "Home",
+          title: "NikeGram",
           iconInsets: { top: 6, bottom: -6 },
           navigatorButtons: {
             leftButtons: [
