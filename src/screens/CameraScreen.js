@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import Camera from "react-native-camera";
 import { Button } from "native-base";
+const config = require("../config/config")
 
 export default class CameraScreen extends Component {
   constructor(prop) {
@@ -56,7 +57,8 @@ export default class CameraScreen extends Component {
           name: name
         });
         //fetch("http://localhost:8080/upload", {
-        fetch("http://nikenode-web.azurewebsites.net/upload", {
+        //fetch("http://nikenode-web.azurewebsites.net/upload", {
+        fetch(config.server + "upload", {
           method: "post",
           headers: {
             "Content-Type": "multipart/form-data"

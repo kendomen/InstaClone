@@ -7,20 +7,24 @@ import {
 } from "react-native-camera-kit";
 
 import Camera from "react-native-camera";
+const config = require("../config/config")
 
 export default class CameraScreen2 extends React.Component {
   async onBottomButtonPressed(event) {
     //const captureImages = JSON.stringify(event.captureImages);
 
     if (event.type === "capture") {
-      console.log("***: " + event.captureImages[0].uri);
-
+    //if (event.type === "left") {
       let formData = new FormData();
       formData.append("content", {
         uri: event.captureImages[0].uri,
         name: event.captureImages[0].name
+
+        //uri: "assets-library://asset/asset.JPG?id=4CDA93E5-3616-41B1-8BCB-A92174505EB6&ext=JPG",
+        //name: "test"
       });
-      fetch("https://nikenode-web.azurewebsites.net/upload", {
+      //fetch("https://nikenode-web.azurewebsites.net/upload", {
+      fetch(config.server + "upload", {
         method: "post",
         headers: {
           "Content-Type": "multipart/form-data"

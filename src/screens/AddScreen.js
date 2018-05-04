@@ -12,6 +12,7 @@ import {
   Dimensions
 } from "react-native";
 import NotImplemented from "../NotImplemented";
+const config = require("../config/config")
 
 var { width, height } = Dimensions.get("window");
 
@@ -79,7 +80,8 @@ export default class AddScreen extends Component {
     console.log(name);
     console.log("************************");
 
-    fetch("https://nikenode-web.azurewebsites.net/upload", {
+    //fetch("https://nikenode-web.azurewebsites.net/upload", {
+    fetch(config.server + "upload", {
       method: "post",
       headers: {
         "Content-Type": "multipart/form-data"

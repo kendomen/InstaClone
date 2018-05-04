@@ -17,8 +17,10 @@ import { Navigation } from "react-native-navigation";
 import FastImage from "react-native-fast-image";
 import Loader from "./Loader";
 import Row from "./Row"
-
 const { width, height } = Dimensions.get("window");
+const config = require("../config/config")
+
+
 
 export default class HomeScreen extends PureComponent {
   constructor(prop) {
@@ -59,9 +61,11 @@ export default class HomeScreen extends PureComponent {
   }
 
   makeRemoteRequest = () => {
+    console.log("******** server: " + config.server)
     //console.log("makeRemoteRequest()...");
     //fetch("http://52.173.252.50:8080/")
-    fetch("https://nikenode-web.azurewebsites.net/")
+    //fetch("https://nikenode-web.azurewebsites.net/")
+    fetch(config.server)
       .then(response => {
         return response.json();
       })
@@ -80,7 +84,8 @@ export default class HomeScreen extends PureComponent {
         });
       })
       .catch(error => {
-        console.log("Error: " + error);
+        console.log("Error2: " + error);
+        console.log("Error2: " + config.server);
       });
   };
 

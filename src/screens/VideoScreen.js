@@ -16,6 +16,7 @@ import Camera from "react-native-camera";
 
 import NotImplemented from "../NotImplemented";
 import Ionicons from "react-native-vector-icons/Ionicons";
+const config = require("../config/config")
 
 let startVideo = false;
 
@@ -66,7 +67,8 @@ export default class VideoScreen extends React.Component {
         uri: data.path,
         name: name
       });
-      fetch("https://nikenode-web.azurewebsites.net/upload", {
+      //fetch("https://nikenode-web.azurewebsites.net/upload", {
+      fetch(config.server + "upload", {
         method: "post",
         headers: {
           "Content-Type": "multipart/form-data"

@@ -6,6 +6,7 @@ import FastImage from 'react-native-fast-image';
 
 import Image from 'react-native-image-progress';
 import ProgressBar from 'react-native-progress/Bar';
+const config = require("./config/config")
 
 //var timeago = require('timeago')
 
@@ -30,21 +31,14 @@ export default class AvView extends Component {
     isLiked: false,
     lastPress: 0,
     animation: false
-     
-    
   }
-
   
-
   constructor(props) {
     super(props);
     this.onLoad = this.onLoad.bind(this);
     this.onProgress = this.onProgress.bind(this);
     this.onBuffer = this.onBuffer.bind(this);
-
     this.doubleTap = this.doubleTap.bind(this);
-
-    
   }
 
   componentWillMount() {
@@ -53,10 +47,14 @@ export default class AvView extends Component {
         this.setState({ imageHeight: Math.floor(h * (width / w)) })
       })
     }
+
+    // try this!
+    this.setState({ isLiked: this.props.data.item.likedby && this.props.data.item.likedby.length > 0 });
   }
 
   onLoad(data) {
     this.setState({ duration: data.duration });
+    
   }
 
   onProgress(data) {
@@ -131,7 +129,12 @@ export default class AvView extends Component {
             <Ionicons name="ios-heart" size={12} color="black" />
             <Text style={styles.text}>
               {" "}
-              {this.state.isLiked ? "Liked by kdomen" : "0 likes"}
+              {/**this.state.isLiked ? "Liked by kdomen" : "0 likes"*/}
+              { 
+                this.state.isLiked ? 
+                <Text>Liked by kdomen</Text>
+                  : null
+              }
             </Text>
           </View>
           <TouchableOpacity
@@ -238,7 +241,6 @@ export default class AvView extends Component {
                 {this.convertDate(this.props.data.item._ts)}
               </Text>
         </View>
-        
 
         {/*end here */}
 
@@ -264,6 +266,17 @@ export default class AvView extends Component {
           isLiked: true,
           animation: true
         });
+       
+        var body = { 
+          id: this.props.data.item._self,
+          username: this.props.data.item.username
+        };
+
+        fetch(config.server + "like", {
+          method: "post",
+          body: JSON.stringify(body),
+          headers: { 'Content-Type': 'application/json' }
+        })
     }
     else {
       this.setState({
@@ -271,6 +284,17 @@ export default class AvView extends Component {
         isLiked: false,
         animation: true
       });
+
+      var body = { 
+        id: this.props.data.item._self,
+        username: this.props.data.item.username
+      };
+
+      fetch(config.server + "unlike", {
+        method: "post",
+        body: JSON.stringify(body),
+        headers: { 'Content-Type': 'application/json' }
+      })
     }
     LayoutAnimation.easeInEaseOut();
       setTimeout(() => {

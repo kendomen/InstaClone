@@ -17,6 +17,7 @@ import { Navigation } from "react-native-navigation";
 import FastImage from "react-native-fast-image";
 import Loader from "./Loader";
 import Row from "./Row"
+const config = require("../config/config")
 
 const { width, height } = Dimensions.get("window");
 
@@ -61,7 +62,8 @@ export default class HomeScreen extends PureComponent {
   makeRemoteRequest = () => {
     //console.log("makeRemoteRequest()...");
     //fetch("http://52.173.252.50:8080/")
-    fetch("https://nikenode-web.azurewebsites.net/")
+    //fetch("https://nikenode-web.azurewebsites.net/")
+    fetch(config.server)
       .then(response => {
         return response.json();
       })
